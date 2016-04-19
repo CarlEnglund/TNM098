@@ -199,13 +199,13 @@
         // if the quality got worse on last iteration
         if (oldDataWithIndex.length == theDataWithIndex.length)
         {
-            console.log("hej");
+            console.log(oldDataWithIndex);
             return oldDataWithIndex;
         }
         
         else
         {
-            console.log("tju");
+            console.log(theDataWithIndex);
             return theDataWithIndex;
         }
 
@@ -225,21 +225,39 @@
 
     function kmeans(data, k) 
     {
-        var dim = Object.keys(data[0]);
+        //var dim = Object.keys(data[0]);
         var randomCentroids = [];
-        var keys = d3.keys(data[0]);
+        var clusterData = [];
+        var dim2 = Object.keys(data[0]);
+        for (var i = 0; i < data.length; i++)
+        {
+            clusterData.push([]);
+            for (var j = 0; j < dim2.length; j++)
+            {
+                if (dim2[j] != "RecordingTimestamp" && dim2[j] != "FixationIndex" && 
+                    dim2[j] != "GazePointIndex" && dim2[j] != "")
+                {
+                    clusterData[i].push(data[i][dim2[j]]);
+                }
+            }            
+        }
+        
+
+        var keys = d3.keys(clusterData[0]);
+        var dim = Object.keys(clusterData[0]);
         // Step 1
         for (var i = 0; i < k; i++)
         {
-            randomCentroids.push(createRandomCentroid(data, dim));
+            randomCentroids.push(createRandomCentroid(clusterData, dim));
         }
-        var dataWithIndex = assignToCluster(randomCentroids, data, dim);
+        var dataWithIndex = assignToCluster(randomCentroids, clusterData, dim);
       
         var newCentroids = [];
         var iterations = 0;
 
         var newCentroids = recalculateCentroids(dataWithIndex, randomCentroids, dim);
 
-        return checkQuality(dataWithIndex, data, newCentroids, dim);
+        return checkQuality(dataWithIndex, clusterData, newCentroids, dim);
     };
+
 

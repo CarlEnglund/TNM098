@@ -37,20 +37,14 @@ d3.tsv("EyeTrack-raw.tsv", function(error, data) {
      d["FixationIndex"] = + d["FixationIndex"];
      d["GazeEventDuration(mS)"] = + d["GazeEventDuration(mS)"];
   });
-  //data = kmeans(data, 3)
-  console.log(data)
-  data = data.filter(function(d) {
 
-  	return d;
-  	
-  		
-  });
   
+
 
 
   x.domain(d3.extent(data, function(d) { return  d["GazePointX(px)"]; }));
   y.domain(d3.extent(data, function(d) { return  d["GazePointY(px)"]; }));
-    radius.domain(d3.extent(data, function(d) { return d["GazeEventDuration(mS)"]; })).nice();
+  radius.domain(d3.extent(data, function(d) { return d["GazeEventDuration(mS)"]; })).nice();
 
 
   svg.append("g")
@@ -83,6 +77,7 @@ d3.tsv("EyeTrack-raw.tsv", function(error, data) {
       .attr("cx", function(d) { return x(d["GazePointX(px)"]); })
       .attr("cy", function(d) { return y(d["GazePointY(px)"]); })
       .style("fill", function(d) { return color(d["RecordingTimeStamp"]); });
+
 
 
 });
