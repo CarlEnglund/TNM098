@@ -34,20 +34,27 @@ d3.tsv("EyeTrack-raw.tsv", function(error, data) {
      d["GazeEventDuration(mS)"] = + d["GazeEventDuration(mS)"];
   });
   var newData =[];
-  newData = kmeans(data, 3)
+  data = kmeans(data, 4)
 
-  console.log(newData);
-  data = data.filter(function(d) {
+
+  /* Data is: 
+  0: Event duration in ms
+  1: x gaze
+  2: y gaze
+  3: centroidindex*/
+
+  console.log(data)
+  /*data = data.filter(function(d) {
 
   	return (d);
   	
   		
-  });
+  });*/
   
 
 
-  x.domain(d3.extent(data, function(d) { return  d["GazePointX(px)"]; }));
-  y.domain(d3.extent(data, function(d) { return  d["GazePointY(px)"]; }));
+  x.domain(d3.extent(data, function(d) { return  d[1]; }));
+  y.domain(d3.extent(data, function(d) { return  d[2]; }));
 
   svg.append("g")
       .attr("class", "x axis")
@@ -76,9 +83,9 @@ d3.tsv("EyeTrack-raw.tsv", function(error, data) {
     .enter().append("circle")
       .attr("class", "dot")
       .attr("r", 3.5)
-      .attr("cx", function(d) { return x(d["GazePointX(px)"]); })
-      .attr("cy", function(d) { return y(d["GazePointY(px)"]); })
-      .style("fill", function(d) { return color(d["RecordingTimeStamp"]); });
+      .attr("cx", function(d) { return x(d[1]); })
+      .attr("cy", function(d) { return y(d[2]); })
+      .style("fill", function(d) { return color(d[3]); });
 
 
 });
