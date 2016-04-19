@@ -4,10 +4,33 @@
 <head>
 	<title>Lab2 TNM098</title>
 	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-	<script src="kmeans.js" charset="utf-8"></script>
+	<!--<script src="kmeans.js" charset="utf-8"></script>-->
+
+	<link rel="stylesheet" href="plot.css">
 </head>
 <body>
 </body>
-	<script src="main.js" charset="utf-8"></script>
+	<div class="container">
+                <!-- row of columns -->
+
+                <br><br><br>
+
+                <div class="row">
+                    <div class="col-md-6" id ="plot" style ="height: 90vh">
+                    <p>
+                         <label>
+                             Time  <span id="slider-value"></span>
+                         </label>
+                         <input type="range" min="127" max="280814" value="4" id="slider"> 
+                       
+                    </div>
+                </div>
+
+    </div>
+
+    <script src="jquery.min.js"></script>
+    <script src="plot.js"></script> 
+    <script src="main.js"></script> 
+       
 
 </html>
