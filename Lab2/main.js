@@ -18,6 +18,10 @@ var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left");
 
+
+var radius = d3.scale.linear()
+    .range([3, 30]);
+
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -34,10 +38,10 @@ d3.tsv("EyeTrack-raw.tsv", function(error, data) {
      d["GazeEventDuration(mS)"] = + d["GazeEventDuration(mS)"];
   });
   //data = kmeans(data, 3)
-
+  console.log(data)
   data = data.filter(function(d) {
 
-  	return (d);
+  	return d;
   	
   		
   });
@@ -46,6 +50,8 @@ d3.tsv("EyeTrack-raw.tsv", function(error, data) {
 
   x.domain(d3.extent(data, function(d) { return  d["GazePointX(px)"]; }));
   y.domain(d3.extent(data, function(d) { return  d["GazePointY(px)"]; }));
+    radius.domain(d3.extent(data, function(d) { return d["GazeEventDuration(mS)"]; })).nice();
+
 
   svg.append("g")
       .attr("class", "x axis")
@@ -73,7 +79,7 @@ d3.tsv("EyeTrack-raw.tsv", function(error, data) {
       .data(data)
     .enter().append("circle")
       .attr("class", "dot")
-      .attr("r", 3.5)
+      .attr("r", function(d) { return radius(d["GazeEventDuration(mS)"]); }) 
       .attr("cx", function(d) { return x(d["GazePointX(px)"]); })
       .attr("cy", function(d) { return y(d["GazePointY(px)"]); })
       .style("fill", function(d) { return color(d["RecordingTimeStamp"]); });
