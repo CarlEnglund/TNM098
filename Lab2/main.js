@@ -33,8 +33,10 @@ d3.tsv("EyeTrack-raw.tsv", function(error, data) {
      d["FixationIndex"] = + d["FixationIndex"];
      d["GazeEventDuration(mS)"] = + d["GazeEventDuration(mS)"];
   });
-  //data = kmeans(data, 3)
+  var newData =[];
+  newData = kmeans(data, 3)
 
+  console.log(newData);
   data = data.filter(function(d) {
 
   	return (d);
