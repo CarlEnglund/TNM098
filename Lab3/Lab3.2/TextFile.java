@@ -3,20 +3,55 @@ import java.io.*;
 public class TextFile
 {
 	private HashSet<String> sentences;
-	private HashMap<Integer, String> wordsInSentences;
+	private ArrayList<HashMap<Integer, String>> wordsInSentences;
 	public TextFile(HashSet<String> theSentences)
 	{
 		sentences = new HashSet<String>(theSentences);
-		wordsInSentences = new HashMap<Integer, String>();
+		wordsInSentences = new ArrayList<HashMap<Integer, String> >();
+		processWords();
+		printWords();
 	}
 
 	public void print()
 	{
-		Iterator iter = sentences.iterator();
+		/*Iterator iter = sentences.iterator();
 		while (iter.hasNext()) 
 		{
 			System.out.println(iter.next());
+		}*/
+		printWords();
+	}
+
+	public void printWords()
+	{
+		for (int i = 0; i < 1; i++)
+		{
+			/*Iterator iter = wordsInSentences.get(i).iterator();
+			while (iter.hasNext())
+			{
+				System.out.println(iter.next());
+			}*/
+			System.out.println(wordsInSentences.get(i).values());
 		}
+	}
+	private void processWords()
+	{
+		HashMap<Integer, String> wordsMap = new HashMap<Integer, String>();
+		Iterator iter = sentences.iterator();
+		while (iter.hasNext())
+		{
+			String sentence = (String) iter.next();
+			String[] words = sentence.split(" ");
+			for (int i = 0; i < words.length; i++)
+			{
+				
+				wordsMap.put(i, words[i]);
+				
+			}
+			wordsInSentences.add(wordsMap);
+		}
+
+
 	}
 
 }
