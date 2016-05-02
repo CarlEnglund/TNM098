@@ -83,8 +83,7 @@ public class TextComparison
 	{
 		s = s.replaceAll("[^a-zA-Z ]", "");
 		s =	s.replaceAll("\\.", "");
-		s = s.replaceAll("\\,", "");
-		return s.replaceAll(" ", "");
+		return s.replaceAll("\\,", "");
 	}
 
 	public static void main(String[] args)
