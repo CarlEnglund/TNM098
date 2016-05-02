@@ -40,7 +40,6 @@ public class TextFile
 		Iterator iter = sentences.iterator();
 		while (iter.hasNext())
 		{
-
 			HashMap<Integer, String> wordsMap = new HashMap<Integer, String>();
 			String sentence = (String) iter.next();
 			
@@ -64,15 +63,11 @@ public class TextFile
 		while (it.hasNext())
 		{
 			String sentence = (String) it.next();
-			/*System.out.println(sentence);
-			System.out.println("SLUT");*/
-			/*System.out.println(sentence);
-			System.out.println("SLUT");*/
+
 			if (sentences.contains(sentence))
 			{
 				System.out.println(sentence);
 				found = true;
-				//return true;
 			}	
 		}
 		return found;

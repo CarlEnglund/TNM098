@@ -41,17 +41,15 @@ public class TextComparison
 				{
 					
 					s+=preProcess(line);
-					s+= " ";
+					s+= " "; 
 				}
 				
 				convertToSentences(s);
 
 				textFiles.add(new TextFile(sentences));
 			}
-
-			//print();
-			compare();
 			
+			compare();
 		}
 		catch(Exception e)
 		{
