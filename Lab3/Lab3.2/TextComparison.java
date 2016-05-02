@@ -39,7 +39,7 @@ public class TextComparison
 				ArrayList<String> newLines = new ArrayList<String>();
 				while((line = bufferedReader.readLine()) != null)
 				{
-					s+= " ";
+					//s+= " ";
 					s+=removeAbbreviations(line);
 				}
 				
@@ -70,7 +70,8 @@ public class TextComparison
 				{
 					if (textFiles.get(i).compare(textFiles.get(j).getHashMaps().get(k)))
 					{
-						System.out.println("Equal sentence found!");
+
+						System.out.println("Equal sentence found in " + i +" and " + j);
 					}		
 				}
 			}
