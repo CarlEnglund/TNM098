@@ -7,6 +7,7 @@ public class TextComparison
 
 	private ArrayList<TextFile> textFiles;
 	private HashSet<String> sentences;
+
 	public TextComparison()
 	{
 		textFiles = new ArrayList<TextFile>();
@@ -60,8 +61,8 @@ public class TextComparison
 	private String removeAbbreviations(String s)
 	{
 		String newString = "";
-		newString = s.replaceAll("Mrs. ", "");
-		newString = newString.replaceAll("Mr. ", "");
+		newString = s.replaceAll("mrs. ", "");
+		newString = newString.replaceAll("mr. ", "");
 		return newString;
 	}
 	private void convertToSentences(String s)
@@ -80,7 +81,10 @@ public class TextComparison
 
 	private String processSentence(String s)
 	{
-		return s.replaceAll("[^a-zA-Z ]", "");
+		s = s.replaceAll("[^a-zA-Z ]", "");
+		s =	s.replaceAll("\\.", "");
+		s = s.replaceAll("\\,", "");
+		return s.replaceAll(" ", "");
 	}
 
 	public static void main(String[] args)
