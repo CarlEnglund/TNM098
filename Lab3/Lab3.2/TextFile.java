@@ -37,15 +37,17 @@ public class TextFile
 	}
 	private void processWords()
 	{
-		HashMap<Integer, String> wordsMap = new HashMap<Integer, String>();
 		Iterator iter = sentences.iterator();
 		while (iter.hasNext())
 		{
+
+			HashMap<Integer, String> wordsMap = new HashMap<Integer, String>();
 			String sentence = (String) iter.next();
+			
 			String[] words = sentence.split(" ");
 			for (int i = 0; i < words.length; i++)
 			{	
-				wordsMap.put(i, words[i]);	
+				wordsMap.put(i, words[i]);
 			}
 			wordsInSentences.add(wordsMap);
 		}
@@ -60,10 +62,25 @@ public class TextFile
 		for (int i = 0; i < wordsInSentences.size(); i++)
 		{
 				//System.out.println(wordsInSentences.get(i).values());
-				if (wordsInSentences.get(i).equals(map))
+
+
+				if (wordsInSentences.get(i).keySet().equals(map.keySet()))
 				{
-					return true;
+					List<String> values1 = new ArrayList<String>(wordsInSentences.get(i).values());
+					List<String> values2 = new ArrayList<String>(map.values());
+					Collections.sort(values1);
+					Collections.sort(values2);
+
+					if (values1.equals(values2))
+					{
+						System.out.println(values1);
+						System.out.println(values2);
+						
+						return true;
+					}
+
 				}
+
 		}
 		return false;
 	}

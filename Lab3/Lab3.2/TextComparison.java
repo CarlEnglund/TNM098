@@ -3,8 +3,6 @@ import java.io.*;
 import java.text.*;
 public class TextComparison
 {
-
-
 	private ArrayList<TextFile> textFiles;
 	private HashSet<String> sentences;
 
@@ -51,7 +49,7 @@ public class TextComparison
 
 			}
 
-			print();
+			//print();
 			compare();
 			
 		}
