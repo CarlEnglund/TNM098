@@ -17,8 +17,8 @@ public class TextFile
 		Iterator iter = sentences.iterator();
 		while (iter.hasNext()) 
 		{
-			System.out.println(iter.next());
-			System.out.println("SLUT");
+			/*System.out.println(iter.next());
+			System.out.println("SLUT");*/
 		}
 		//printWords();
 	}
@@ -32,7 +32,7 @@ public class TextFile
 			{
 				System.out.println(iter.next());
 			}*/
-			System.out.println(wordsInSentences.get(i).values());
+			//System.out.println(wordsInSentences.get(i).values());
 		}
 	}
 	private void processWords()
@@ -56,34 +56,33 @@ public class TextFile
 	{
 		return wordsInSentences;
 	}
-	public boolean compare(HashMap<Integer, String> map)
+
+	public boolean compare(HashSet<String> theSentences)
 	{
-		//System.out.println(map.values());
-		for (int i = 0; i < wordsInSentences.size(); i++)
+		Iterator it = theSentences.iterator();
+		while (it.hasNext())
 		{
-				//System.out.println(wordsInSentences.get(i).values());
-
-
-				if (wordsInSentences.get(i).keySet().equals(map.keySet()))
-				{
-					List<String> values1 = new ArrayList<String>(wordsInSentences.get(i).values());
-					List<String> values2 = new ArrayList<String>(map.values());
-					Collections.sort(values1);
-					Collections.sort(values2);
-
-					if (values1.equals(values2))
-					{
-						System.out.println(values1);
-						System.out.println(values2);
-						
-						return true;
-					}
-
-				}
-
+			String sentence = (String) it.next();
+			/*System.out.println(sentence);
+			System.out.println("SLUT");*/
+			/*System.out.println(sentence);
+			System.out.println("SLUT");*/
+			if (sentences.contains(sentence))
+			{
+				System.out.println(sentence);
+				return true;
+			}	
 		}
 		return false;
+
 	}
+
+	public HashSet<String> getSentences()
+	{
+		return sentences;
+	}
+
+
 
 
 }

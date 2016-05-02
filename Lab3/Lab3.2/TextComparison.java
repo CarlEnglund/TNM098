@@ -39,14 +39,14 @@ public class TextComparison
 				ArrayList<String> newLines = new ArrayList<String>();
 				while((line = bufferedReader.readLine()) != null)
 				{
-					//s+= " ";
-					s+=removeAbbreviations(line);
+					
+					s+=preProcess(line);
+					s+= " ";
 				}
 				
 				convertToSentences(s);
 
 				textFiles.add(new TextFile(sentences));
-
 			}
 
 			//print();
@@ -66,29 +66,31 @@ public class TextComparison
 		{
 			for (int j = i+1; j < textFiles.size(); j++)
 			{
-				for (int k = 0; k < textFiles.get(j).getHashMaps().size(); k++)
+				if (textFiles.get(i).compare(textFiles.get(j).getSentences()))
 				{
-					if (textFiles.get(i).compare(textFiles.get(j).getHashMaps().get(k)))
-					{
-
-						System.out.println("Equal sentence found in " + i +" and " + j);
-					}		
+					System.out.println("Equal sentence found in " + (i+1) +" and " + (j+1));
 				}
+
 			}
 		}
 		
 	}
 
-	private String removeAbbreviations(String s)
+	private String preProcess(String s)
 	{
 		String newString = "";
 		newString = s.replaceAll("Mrs. ", "");
+		newString = newString.replaceAll("Dr. ", "");
 		newString = newString.replaceAll("Mr. ", "");
+		newString = newString.replace("\"", "");
+		newString = newString.replace("?", "");
+		newString = newString.replace("!", "");
+		newString = newString.replace("'", "");
+		newString = newString.replace("-", "");
 		return newString;
 	}
 	private void convertToSentences(String s)
 	{
-		//System.out.println(s);
 		sentences = new HashSet<String>();
 		Locale currentLocale = new Locale("en", "US");
 		BreakIterator bIterator = BreakIterator.getSentenceInstance(currentLocale);
@@ -97,7 +99,6 @@ public class TextComparison
 		for (int end = bIterator.next(); end != BreakIterator.DONE; start = end, end = bIterator.next())
 		{
 			String sentence = s.substring(start, end);
-			//System.out.println(sentence);
 			sentences.add(processSentence(sentence.toLowerCase()));
 		}
 	}
@@ -106,7 +107,9 @@ public class TextComparison
 	{
 		s = s.replaceAll("[^a-zA-Z ]", "");
 		s =	s.replaceAll("\\.", "");
-		return s.replaceAll("\\,", "");
+		s = s.replaceAll("\\,", "");
+		
+		return s.replaceAll(" ", "");
 	}
 
 	public static void main(String[] args)
