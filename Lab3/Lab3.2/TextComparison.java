@@ -68,7 +68,7 @@ public class TextComparison
 			{
 				if (textFiles.get(i).compare(textFiles.get(j).getSentences()))
 				{
-					System.out.println("Equal sentence found in " + (i+1) +" and " + (j+1));
+					System.out.println("Equal sentence(s) found in " + (i+1) +" and " + (j+1)); // 2 and 8 has same paragraph
 				}
 
 			}
@@ -79,9 +79,9 @@ public class TextComparison
 	private String preProcess(String s)
 	{
 		String newString = "";
-		newString = s.replaceAll("Mrs. ", "");
-		newString = newString.replaceAll("Dr. ", "");
-		newString = newString.replaceAll("Mr. ", "");
+		newString = s.replaceAll("Mrs. ", "Mrs");
+		newString = newString.replaceAll("Dr. ", "Dr");
+		newString = newString.replaceAll("Mr. ", "Mr");
 		newString = newString.replace("\"", "");
 		newString = newString.replace("?", "");
 		newString = newString.replace("!", "");

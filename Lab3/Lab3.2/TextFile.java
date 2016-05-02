@@ -60,6 +60,7 @@ public class TextFile
 	public boolean compare(HashSet<String> theSentences)
 	{
 		Iterator it = theSentences.iterator();
+		boolean found = false;
 		while (it.hasNext())
 		{
 			String sentence = (String) it.next();
@@ -70,10 +71,11 @@ public class TextFile
 			if (sentences.contains(sentence))
 			{
 				System.out.println(sentence);
-				return true;
+				found = true;
+				//return true;
 			}	
 		}
-		return false;
+		return found;
 
 	}
 
