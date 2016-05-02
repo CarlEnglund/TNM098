@@ -41,15 +41,18 @@ public class TextComparison
 				ArrayList<String> newLines = new ArrayList<String>();
 				while((line = bufferedReader.readLine()) != null)
 				{
-					s+=removeAbbreviations(line.toLowerCase());
+					s+= " ";
+					s+=removeAbbreviations(line);
 				}
 				
 				convertToSentences(s);
 
 				textFiles.add(new TextFile(sentences));
+
 			}
 
 			print();
+			compare();
 			
 		}
 		catch(Exception e)
@@ -58,15 +61,35 @@ public class TextComparison
 		}
 
 	}
+
+	private void compare()
+	{
+		for (int i = 0; i < textFiles.size(); i++)
+		{
+			for (int j = i+1; j < textFiles.size(); j++)
+			{
+				for (int k = 0; k < textFiles.get(j).getHashMaps().size(); k++)
+				{
+					if (textFiles.get(i).compare(textFiles.get(j).getHashMaps().get(k)))
+					{
+						System.out.println("Equal sentence found!");
+					}		
+				}
+			}
+		}
+		
+	}
+
 	private String removeAbbreviations(String s)
 	{
 		String newString = "";
-		newString = s.replaceAll("mrs. ", "");
-		newString = newString.replaceAll("mr. ", "");
+		newString = s.replaceAll("Mrs. ", "");
+		newString = newString.replaceAll("Mr. ", "");
 		return newString;
 	}
 	private void convertToSentences(String s)
 	{
+		//System.out.println(s);
 		sentences = new HashSet<String>();
 		Locale currentLocale = new Locale("en", "US");
 		BreakIterator bIterator = BreakIterator.getSentenceInstance(currentLocale);
@@ -75,7 +98,8 @@ public class TextComparison
 		for (int end = bIterator.next(); end != BreakIterator.DONE; start = end, end = bIterator.next())
 		{
 			String sentence = s.substring(start, end);
-			sentences.add(processSentence(sentence));
+			//System.out.println(sentence);
+			sentences.add(processSentence(sentence.toLowerCase()));
 		}
 	}
 

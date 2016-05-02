@@ -9,17 +9,18 @@ public class TextFile
 		sentences = new HashSet<String>(theSentences);
 		wordsInSentences = new ArrayList<HashMap<Integer, String> >();
 		processWords();
-		printWords();
+		//printWords();
 	}
 
 	public void print()
 	{
-		/*Iterator iter = sentences.iterator();
+		Iterator iter = sentences.iterator();
 		while (iter.hasNext()) 
 		{
 			System.out.println(iter.next());
-		}*/
-		printWords();
+			System.out.println("SLUT");
+		}
+		//printWords();
 	}
 
 	public void printWords()
@@ -43,15 +44,29 @@ public class TextFile
 			String sentence = (String) iter.next();
 			String[] words = sentence.split(" ");
 			for (int i = 0; i < words.length; i++)
-			{
-				
-				wordsMap.put(i, words[i]);
-				
+			{	
+				wordsMap.put(i, words[i]);	
 			}
 			wordsInSentences.add(wordsMap);
 		}
-
-
 	}
+	public ArrayList<HashMap<Integer, String>> getHashMaps()
+	{
+		return wordsInSentences;
+	}
+	public boolean compare(HashMap<Integer, String> map)
+	{
+		//System.out.println(map.values());
+		for (int i = 0; i < wordsInSentences.size(); i++)
+		{
+				//System.out.println(wordsInSentences.get(i).values());
+				if (wordsInSentences.get(i).equals(map))
+				{
+					return true;
+				}
+		}
+		return false;
+	}
+
 
 }
